@@ -7,8 +7,7 @@ of `hlsreport`. The application can validate a manifest n times if for some reas
 
 ## Requirements
 The user must install the aforementioned
-[Apple's HLS tools](https://developer.apple.com/documentation/http-live-streaming/using-apple-s-http-live-streaming-hls-tools)
-, and have go `1.20` or above installed.
+[Apple's HLS tools](https://developer.apple.com/documentation/http-live-streaming/using-apple-s-http-live-streaming-hls-tools), and have go `1.20` or above installed.
 
 ## Flags
 ```
