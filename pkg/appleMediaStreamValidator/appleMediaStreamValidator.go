@@ -18,9 +18,14 @@ type AppleMediaStreamValidator struct {
 	validator *exec.Cmd
 }
 
-func New() *AppleMediaStreamValidator {
+func New(parsePlaylist bool) *AppleMediaStreamValidator {
+	cmd := exec.Command(mediaStreamValidator)
+	if parsePlaylist {
+		cmd.Args = append(cmd.Args, "-p")
+	}
+
 	return &AppleMediaStreamValidator{
-		validator: exec.Command(mediaStreamValidator),
+		validator: cmd,
 	}
 }
 
@@ -31,7 +36,8 @@ func (a *AppleMediaStreamValidator) Validate(uri string) (string, bool, error) {
 	outputFilePath := fmt.Sprintf(domain.ValidatedPath, validatedUUID)
 
 	a.validator.Args = append(a.validator.Args, []string{
-		"-p", "-O", outputFilePath,
+		"-p",
+		"-O", outputFilePath,
 		uri,
 	}...)
 

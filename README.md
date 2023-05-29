@@ -22,7 +22,7 @@ The user must install the aforementioned
 
 ## Usage
 ```bash
-hlsvalidator [-m manifest uri] [-t time] [-s]
+hlsvalidator [-m manifest uri] [-t time] [-s] [-p]
 ```
 
 ## Example

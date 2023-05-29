@@ -13,9 +13,10 @@ import (
 )
 
 var (
-	manifestURI string
-	times       int
-	saveValid   bool
+	manifestURI   string
+	times         int
+	saveValid     bool
+	parsePlaylist bool
 )
 
 func init() {
@@ -42,7 +43,17 @@ func init() {
 		false,
 		"save reports for valid HLS manifests. validated jsons will always be generated",
 	)
+
+	flag.BoolVarP(
+		&parsePlaylist,
+		"parse-playlist-only",
+		"p",
+		false,
+		"Only parses an HLS playlist",
+	)
+
 	flag.Lookup("save-valid").NoOptDefVal = "true"
+	flag.Lookup("parse-playlist-only").NoOptDefVal = "true"
 }
 
 func main() {
@@ -60,7 +71,7 @@ func main() {
 func generateValidators() []domain.IHLSValidator {
 	var HLSValidators []domain.IHLSValidator
 	for i := 0; i < times; i++ {
-		HLSValidators = append(HLSValidators, appleMediaStreamValidator.New())
+		HLSValidators = append(HLSValidators, appleMediaStreamValidator.New(parsePlaylist))
 	}
 	return HLSValidators
 }
